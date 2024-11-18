@@ -17,15 +17,8 @@ const HeaderBar = () => {
           <Nav className="me-auto custom-nav">
             <Nav.Link href="#home" className="custom-nav-link">Home</Nav.Link>
             <Nav.Link href="#link" className="custom-nav-link">Rewards</Nav.Link>
-            <NavDropdown title="Locations" id="basic-nav-dropdown" className="custom-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Round Rock</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Lakeline</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Mueller</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Slaughter</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Village</NavDropdown.Item>
-              
-              
-            </NavDropdown>
+            <Nav.Link href="#link" className="custom-nav-link">Food & Drinks</Nav.Link>
+
           </Nav>
           {/* New Nav for buttons aligned to the right */}
           <Nav className="ms-auto">
