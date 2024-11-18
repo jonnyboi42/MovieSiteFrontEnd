@@ -127,14 +127,6 @@ body{
 }
 
 
-
-
-
-
-
-
-
-
 /* Location Field */
 .location-dropdown{
     width: auto;
@@ -173,29 +165,11 @@ body{
     color: white;
 }
 
-
-
-@media screen and (max-width: 1000px){
-
-    .options{
-        margin-top: 1.8em;
-    }
-
-    .now-playing-coming-soon{
-        
-        gap: .6em;
-    }
-    .now-playing-coming-soon > a{
-        font-size: 1rem;
-        text-align: center;
-        
-        
-    }
-
-    .location-field{ 
-        font-size: .7rem !important;
-    }
+.dropdown-item{
+    color: white;
 }
+
+
 
 
 

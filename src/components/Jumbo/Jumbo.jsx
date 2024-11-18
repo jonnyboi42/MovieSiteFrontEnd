@@ -33,7 +33,7 @@ const Jumbo = () => {
           <img className="d-block w-100" src="src/assets/imgs/jumbo/spidermanjumbo.jpg" alt="Third slide" />
           <div className="release-date">NOW PLAYING</div>
           <div className="carousel-caption spiderman">
-            <h5>SPIDERMAN NO WAY HOME</h5>
+            <h5>SPIDERMAN 2</h5>
             <button>TICKETS</button>
           </div>
         </div>

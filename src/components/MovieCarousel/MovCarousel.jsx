@@ -73,8 +73,8 @@ const MovCarousel = () => {
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu className="inner-dropdown">
-                            <Dropdown.Item  onClick={() => handleSelectLocation('Roundrock')}>Round Rock</Dropdown.Item>
-                            <Dropdown.Item  onClick={() => handleSelectLocation('Mueller')}>Mueller</Dropdown.Item>
+                            <Dropdown.Item className='dropdown-item'  onClick={() => handleSelectLocation('Roundrock')}>Round Rock</Dropdown.Item>
+                            <Dropdown.Item  className='dropdown-item' onClick={() => handleSelectLocation('Mueller')}>Mueller</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                 </Col>
