@@ -1,0 +1,203 @@
+
+
+body{
+    background-color: black;
+}
+
+.options{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.now-playing-coming-soon{
+    display: flex;
+    align-items: center;
+    gap: 2.5em;
+    margin-bottom: 1em;
+}
+
+.now-playing-coming-soon > a {
+    color: white;
+    font-size: 2.1em;
+    text-decoration: none;
+    transition: text-shadow 0.5s ease-in-out; /* Move this to the base state */
+}
+
+/* Glow hover effect for the tabs */
+.now-playing-coming-soon > a:hover {
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8); /* Glowing text effect */
+}
+
+
+.now-playing-coming-soon > a.active {
+    border-bottom: 3px solid rgb(154, 154, 154); /* White border */
+    transition: box-shadow 0.3s ease-in-out; /* Smooth glow effect */
+}
+
+.now-playing > input::placeholder {
+    font-size: .9rem; /* Adjust the font size as needed */
+    color: rgba(255, 255, 255, 0.6); /* Optional: makes the placeholder text slightly transparent */
+    font-family: "Titillium Web", sans-serif; /* Matches the input font */
+    display: flex;
+    align-items: center; 
+}
+
+
+.location{
+    background: none !important;
+    border: 1px solid white;
+    
+}
+
+
+/* Movie Card */
+.movie-card{
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    /* border-color: red; */
+}
+
+.card {
+    border: none; /* Removes border */
+    box-shadow: none; /* Removes shadow */
+    background-color: transparent; /* Makes background transparent */
+    padding: 0; /* Removes any padding */
+    margin: 0; /* Removes any margin */
+}
+
+
+.movie-card {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allow the cards to grow and fill space */
+    justify-content: center; /* Center content within the card */
+    align-items: center; /* Center align items */
+}
+
+.movie-image {
+    width: 100%; /* Full width of the parent container */
+    height: auto; /* Allow the height to adjust dynamically */
+    object-fit: contain; /* Ensures the image covers the area without distortion */
+    background-color: black;
+    transition: box-shadow 0.3s ease-in-out; /* Smooth transition for hover effect */
+}
+
+.movie-image:hover {
+    box-shadow: 0 0 15px 5px rgba(224, 225, 225, 0.8); /* Neon blue glow */
+    cursor: pointer;
+}
+
+
+
+/* Movie Info */
+.movie-info {
+    margin-top: .7em;
+    display: flex;
+    /* align-items: center;
+    justify-content: center; */
+    justify-content: space-between;
+    color: white;
+   
+}
+
+.movie-title{
+    font-size: 1.6rem;
+    font-family: "Titillium Web", sans-serif;
+    font-weight: 300;
+    color: rgb(255, 255, 255);
+}
+
+.movie-info > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5em;
+}
+
+.movie-runtime,
+.movie-release-date {
+    font-size: 1rem;
+    color: rgb(188, 184, 184);
+    margin-bottom: 0;
+    font-family: "Host Grotesk", sans-serif;
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+/* Location Field */
+.location-dropdown{
+    width: auto;
+}
+
+.location-field{
+    /* width: 30%; */
+    background: none;
+    padding-left: 2em;
+    padding-right: 2em;
+    color:white;
+    letter-spacing: 10px;
+    border-color: rgb(240, 240, 240);
+}
+
+.location-field:hover{
+    background-color: black;
+    border-color: red;
+}
+
+.location-field.show {
+    background-color: rgba(255, 6, 6, 0.973); /* Change this to your desired color */
+    border-color: rgb(156, 32, 32);
+}
+
+.location-svg{
+    color: white;
+}
+
+.inner-dropdown{
+    background-color: black;
+    color: white !important;
+}
+
+.inner-dropdown-item{
+    color: white;
+}
+
+
+
+@media screen and (max-width: 1000px){
+
+    .options{
+        margin-top: 1.8em;
+    }
+
+    .now-playing-coming-soon{
+        
+        gap: .6em;
+    }
+    .now-playing-coming-soon > a{
+        font-size: 1rem;
+        text-align: center;
+        
+        
+    }
+
+    .location-field{ 
+        font-size: .7rem !important;
+    }
+}
+
+
+
+
+

@@ -1,0 +1,79 @@
+
+.movie-nav{
+    background-color: black !important;
+    
+}
+.custom-logo{
+    font-family: "Teko", sans-serif !important;
+    font-size: 4rem;
+    color: rgb(255, 255, 255);
+    
+}
+
+.custom-toggler{
+    border: 1px solid rgb(216, 210, 210);
+}
+
+
+
+.custom-logo > span{
+    color: rgb(205, 29, 29);
+}
+
+
+.custom-nav-link, .custom-nav-dropdown .dropdown-toggle {
+    color: white !important; /* Override Bootstrap default */
+    font-family: "Teko", sans-serif !important;
+    font-size: 1.4rem;
+    
+}
+
+.custom-nav-dropdown .dropdown-item {
+    color: white !important; /* Color for dropdown items */
+}
+
+.custom-nav-dropdown .dropdown-item:hover {
+    background-color: #000000; /* Optional: Change background on hover */
+    color: white !important;
+}
+
+.custom-nav-dropdown .dropdown-menu {
+    background-color: #000000; /* Set the desired background color */
+    border: none; /* Remove the border (optional) */
+}
+
+.custom-nav-dropdown .dropdown-item {
+    color: white; /* Adjust the text color to contrast with the background */
+}
+
+.custom-nav-dropdown .dropdown-item:hover {
+    background-color: #3b3b3b; /* Optional: Change background on hover */
+    color: white;
+}
+
+.links{
+    color: white !important;
+}
+
+.ms-auto{
+    display: flex;
+    gap: 1em;
+}
+.ms-auto > button{
+    border-radius:2px;
+    background-color: rgb(0, 0, 0);
+    border: 1px solid white;
+    letter-spacing: 6px;
+    font-size: 1.2rem;
+    color: white;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+}
+
+
+.ms-auto > button:hover {
+    background-color: rgb(208, 204, 204);
+    cursor: pointer;
+    color: black;
+    cursor: pointer;
+  }

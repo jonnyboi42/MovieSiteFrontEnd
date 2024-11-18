@@ -1,0 +1,36 @@
+/* Movie Carousel Media Queries*/
+
+@media screen and (max-width: 1000px){
+
+    .options{
+        margin-top: 1.8em;
+    }
+
+    .now-playing-coming-soon{
+        
+        gap: .6em;
+    }
+    .now-playing-coming-soon > a{
+        font-size: 1rem;
+        text-align: center;
+        
+        
+    }
+
+    .location-field{ 
+        font-size: .7rem !important;
+    }
+}
+
+
+/* Jumbotron Media Queries */
+@media screen and (max-width: 800px){
+    .carousel-caption{
+      display: none;
+    }
+
+    .release-date{
+      font-size: 1rem;
+  
+    }
+  }
