@@ -11,7 +11,7 @@ This repository contains the frontend for the Movie Site application. The fronte
 - **Port**: The frontend is configured to run on **port 5173** by default.
 
 ## Prerequisites
-Ensure that the backend server is running before starting the frontend. Refer to the [Movie Site Backend README](../movie-site-backend/README.md) for instructions on setting up the backend.
+Ensure that the backend server is running before starting the frontend. The backend can be found on my github named MovieSiteBackEnd.
 
 ## Getting Started
 To run the frontend locally:
