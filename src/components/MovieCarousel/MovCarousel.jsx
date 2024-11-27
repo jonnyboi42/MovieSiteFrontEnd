@@ -46,6 +46,14 @@ const MovCarousel = () => {
         setSelectedLocation(option); // Update selected location
     };
 
+    //Movie Click 
+    const handleMovieClick = (e, id, movieTickets) =>  {
+        e.preventDefault();
+        console.log('Movie ID', id);
+        console.log('Available Tickets', movieTickets);
+
+    }
+
     return (
         <Container className="container-lg">
             <Row>
@@ -83,11 +91,13 @@ const MovCarousel = () => {
                 {movies.map((movie) => (
                     <Col key={movie.id} xs={6} sm={6} md={6} lg={3} className="mb-4">
                         <div className="card movie-card">
-                            <img
-                                src={movie.src}
-                                alt={movie.alt}
-                                className="movie-image img-fluid"
-                            />
+                            <a href="" onClick={(e) => handleMovieClick(e ,movie.id, movie.ticketsAvailable)}>
+                                <img
+                                    src={movie.src}
+                                    alt={movie.alt}
+                                    className="movie-image img-fluid"
+                                />
+                            </a>
                         </div>
                         <div className="movie-info">
                             <p className="movie-runtime">{movie.runtime}</p>
