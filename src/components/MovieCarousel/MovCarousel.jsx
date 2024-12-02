@@ -1,25 +1,22 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 const MovCarousel = () => {
-    // Single state for toggling between Now Playing and Coming Soon
     const [isNowPlaying, setIsNowPlaying] = useState(true);
-
-    // State for location dropdown
-    const [selectedLocation, setSelectedLocation] = useState('Roundrock'); // Default to 'Round Rock'
+    const [selectedLocation, setSelectedLocation] = useState('Roundrock');
     const [movies, setMovies] = useState([]);
+    const navigate = useNavigate(); // Initialize useNavigate
 
-    // Fetch movie data based on the current state
     useEffect(() => {
         const fetchMovies = async () => {
             try {
                 const response = isNowPlaying
                     ? await fetch(`http://localhost:3000/${selectedLocation}`)
                     : await fetch(`http://localhost:3000/comingsoon`);
-                
                 const data = await response.json();
                 setMovies(data);
             } catch (error) {
@@ -28,31 +25,29 @@ const MovCarousel = () => {
         };
 
         fetchMovies();
-    }, [selectedLocation, isNowPlaying]); // Re-fetch when location or state changes
+    }, [selectedLocation, isNowPlaying]);
 
-    // Toggle between Now Playing & Coming Soon
-    const handleNowPlayingClick = (e) => {
+  
+    const handleMovieClick = (e, selectedLocation, id, movieName, movieTickets, isNowPlaying) => {
         e.preventDefault();
-        setIsNowPlaying(true);
+    
+        // Determine the route based on whether it's Now Playing or Coming Soon
+        const route = isNowPlaying
+            ? `/${selectedLocation.toLowerCase()}/movie/${id}` // Location-specific for Now Playing
+            : `/comingsoon/movie/${id}`; // Shared route for Coming Soon
+        
+        console.log('Navigating to route:', route);
+        navigate(route, {
+            state: {
+                location: isNowPlaying ? selectedLocation : 'Coming Soon', // Provide context
+                id,
+                name: movieName,
+                ticketsAvailable: movieTickets,
+                category: isNowPlaying ? 'Now Playing' : 'Coming Soon',
+            },
+        });
     };
 
-    const handleComingSoonClick = (e) => {
-        e.preventDefault();
-        setIsNowPlaying(false);
-    };
-
-    // Location Dropdown Logic
-    const handleSelectLocation = (option) => {
-        setSelectedLocation(option); // Update selected location
-    };
-
-    //Movie Click 
-    const handleMovieClick = (e, id, movieTickets) =>  {
-        e.preventDefault();
-        console.log('Movie ID', id);
-        console.log('Available Tickets', movieTickets);
-
-    }
 
     return (
         <Container className="container-lg">
@@ -62,27 +57,30 @@ const MovCarousel = () => {
                         <a
                             href="#"
                             className={`lead nowplaying ${isNowPlaying ? 'active' : ''}`}
-                            onClick={handleNowPlayingClick}
+                            onClick={(e) => { e.preventDefault(); setIsNowPlaying(true); }}
                         >
                             NOW PLAYING
                         </a>
                         <a
                             href="#"
                             className={`lead comingsoon ${!isNowPlaying ? 'active' : ''}`}
-                            onClick={handleComingSoonClick}
+                            onClick={(e) => { e.preventDefault(); setIsNowPlaying(false); }}
                         >
                             COMING SOON
                         </a>
                     </div>
 
-                    <Dropdown className='location-dropdown'>
+                    <Dropdown className="location-dropdown">
                         <Dropdown.Toggle variant="success" id="dropdown-basic" className="location-field">
-                            {selectedLocation} {/* Show selected location */}
+                            {selectedLocation}
                         </Dropdown.Toggle>
-
                         <Dropdown.Menu className="inner-dropdown">
-                            <Dropdown.Item className='dropdown-item'  onClick={() => handleSelectLocation('Roundrock')}>Round Rock</Dropdown.Item>
-                            <Dropdown.Item  className='dropdown-item' onClick={() => handleSelectLocation('Mueller')}>Mueller</Dropdown.Item>
+                            <Dropdown.Item onClick={() => setSelectedLocation('Roundrock')}>
+                                Round Rock
+                            </Dropdown.Item>
+                            <Dropdown.Item onClick={() => setSelectedLocation('Mueller')}>
+                                Mueller
+                            </Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                 </Col>
@@ -91,9 +89,14 @@ const MovCarousel = () => {
                 {movies.map((movie) => (
                     <Col key={movie.id} xs={6} sm={6} md={6} lg={3} className="mb-4">
                         <div className="card movie-card">
-                            <a href="" onClick={(e) => handleMovieClick(e ,movie.id, movie.ticketsAvailable)}>
+                            <a
+                                href="#"
+                                onClick={(e) =>
+                                    handleMovieClick(e, selectedLocation, movie.id, movie.title, movie.ticketsAvailable, isNowPlaying)
+                                }
+                            >
                                 <img
-                                    src={movie.src}
+                                    src={movie.src[0]}
                                     alt={movie.alt}
                                     className="movie-image img-fluid"
                                 />
@@ -101,7 +104,7 @@ const MovCarousel = () => {
                         </div>
                         <div className="movie-info">
                             <p className="movie-runtime">{movie.runtime}</p>
-                            <p className='category'>{movie.category}</p>
+                            <p className="category">{movie.category}</p>
                         </div>
                     </Col>
                 ))}

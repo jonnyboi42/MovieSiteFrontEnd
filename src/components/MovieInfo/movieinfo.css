@@ -1,0 +1,91 @@
+
+
+
+.specific-movie-info {
+    position: relative; /* Make the container relative so we can position the pseudo-element */
+    background-image: url('src/assets/imgs/jumbo/bladerunner2049bkgrnd.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the content */
+    color: white;
+}
+
+/* Pseudo-element for the dark overlay */
+.specific-movie-info::before {
+    content: ''; /* Required to create the pseudo-element */
+    position: absolute; /* Position it absolutely within the parent */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay with 50% opacity */
+    z-index: 0; /* Ensure it sits behind the content */
+}
+
+/* Content inside the container */
+.specific-movie-info > * {
+    position: relative; /* Ensure content is above the dark overlay */
+    z-index: 1; /* Content is above the overlay */
+}
+
+.specific-movie-info-inner-col > img{
+    height: 400px;
+
+}
+
+.specific-movie-info-inner-col{
+    display: flex;
+    gap: 2em;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    
+}
+
+.specific-movie-info-buttons{
+    display: flex;
+    gap: 1em;
+}
+
+.trailer-button{
+    background: none;
+    border: 2px solid white;
+}
+
+.trailer-button:hover{
+    background-color: rgb(93, 89, 89);
+    border-color: white;
+}
+
+.showtime-button{
+    background: rgb(203, 9, 9);
+    border: 2px solid white;
+}
+.showtime-button:hover{
+    background: none;
+    border-color: white;
+}
+@media  screen and (max-width: 750px) {
+    .specific-movie-info-inner-col{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .specific-movie-info-inner-col > img{
+        display: none;
+    
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
