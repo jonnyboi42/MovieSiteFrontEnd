@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import Logo from '../../assets/icons/Logo.svg';
 
 const HeaderBar = () => {
   return (
@@ -10,7 +11,7 @@ const HeaderBar = () => {
       <Container>
         <Navbar.Brand href="#home" className='custom-logo'>
           {/* ATLAS <span>CINEMA</span><img src="src/assets/icons/moviesvg.svg" alt="" /> */}
-          <img src="src/assets/icons/Logo.svg" alt="" />
+          <img src={Logo} alt="" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" className="custom-toggler" />
         <Navbar.Collapse id="basic-navbar-nav">
