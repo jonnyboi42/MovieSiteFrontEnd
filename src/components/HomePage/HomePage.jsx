@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import HeaderBar from '../Navbar/Navbar';
-import MovCarousel from '../MovieCarousel/MovCarousel';
+import Movies from '../Movies/Movies';
 import Jumbo from '../Jumbo/Jumbo';
 
-const Home = () => {
+const HomePage = () => {
     return (
         <>
         <HeaderBar/>
         <Jumbo/>
-        <MovCarousel/>
+        <Movies/>
     
       </>
     )
     
 };
 
-export default Home;
+export default HomePage;

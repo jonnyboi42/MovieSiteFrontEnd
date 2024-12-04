@@ -1,8 +1,8 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './components/Home/home.css'
-import './components/MovieCarousel/movcarousel.css'
+import './components/HomePage/homepage.css'
+import './components/Movies/movies.css'
 import './assets/styles/styles.css'
 import './components/Navbar/navbar.css'
 import './components/Jumbo/jumbo.css'

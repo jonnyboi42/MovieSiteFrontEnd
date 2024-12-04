@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom'; // Added useLocation
+
 import Container from 'react-bootstrap/Container';
-import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
+
+
 
 const MovieInfo = () => {
     const { location, id } = useParams(); // Access 'location' and 'id' from URL
@@ -39,6 +41,7 @@ const MovieInfo = () => {
     }
 
     return (
+        <>
         <Container
             className="specific-movie-info"
             fluid
@@ -68,6 +71,7 @@ const MovieInfo = () => {
                 </Col>
             </Row>
         </Container>
+        </>
     );
 };
 

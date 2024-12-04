@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './components/Home/Home';
+import HomePage from './components/HomePage/HomePage'
 import MoviePage from './components/MoviePage/MoviePage';
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
         <Router>
             <Routes>
                 {/* Home page */}
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<HomePage />} />
 
                 {/* Dynamic movie info route */}
                 <Route path="/:location/movie/:id" element={<MoviePage />} />

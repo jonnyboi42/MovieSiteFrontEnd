@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Dropdown from 'react-bootstrap/Dropdown';
 
-const MovCarousel = () => {
+const Movies = () => {
     const [isNowPlaying, setIsNowPlaying] = useState(true);
     const [selectedLocation, setSelectedLocation] = useState('Roundrock');
     const [movies, setMovies] = useState([]);
@@ -113,4 +113,4 @@ const MovCarousel = () => {
     );
 };
 
-export default MovCarousel;
+export default Movies;
