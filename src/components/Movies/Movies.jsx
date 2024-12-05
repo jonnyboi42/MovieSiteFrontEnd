@@ -1,22 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { setLocation } from '../../redux/movieSlice'; // Import Redux action
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 const Movies = () => {
-    const [isNowPlaying, setIsNowPlaying] = useState(true);
-    const [selectedLocation, setSelectedLocation] = useState('Roundrock');
-    const [movies, setMovies] = useState([]);
-    const navigate = useNavigate(); // Initialize useNavigate
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    // Get the location from Redux state
+    const selectedLocation = useSelector((state) => state.movie.selectedLocation) || 'Roundrock';
+
+    // Local state for Now Playing or Coming Soon
+    const [isNowPlaying, setIsNowPlaying] = React.useState(true);
+    const [movies, setMovies] = React.useState([]);
 
     useEffect(() => {
         const fetchMovies = async () => {
             try {
-                const response = isNowPlaying
-                    ? await fetch(`http://localhost:3000/${selectedLocation}`)
-                    : await fetch(`http://localhost:3000/comingsoon`);
+                const endpoint = isNowPlaying
+                    ? `http://localhost:3000/${selectedLocation}`
+                    : `http://localhost:3000/comingsoon`;
+                const response = await fetch(endpoint);
                 const data = await response.json();
                 setMovies(data);
             } catch (error) {
@@ -27,19 +35,20 @@ const Movies = () => {
         fetchMovies();
     }, [selectedLocation, isNowPlaying]);
 
-  
-    const handleMovieClick = (e, selectedLocation, id, movieName, movieTickets, isNowPlaying) => {
+    const handleLocationChange = (location) => {
+        dispatch(setLocation(location)); // Update location in Redux store
+    };
+
+    const handleMovieClick = (e, id, movieName, movieTickets, isNowPlaying) => {
         e.preventDefault();
-    
-        // Determine the route based on whether it's Now Playing or Coming Soon
+
         const route = isNowPlaying
-            ? `/${selectedLocation.toLowerCase()}/movie/${id}` // Location-specific for Now Playing
-            : `/comingsoon/movie/${id}`; // Shared route for Coming Soon
-        
-        console.log('Navigating to route:', route);
+            ? `/${selectedLocation.toLowerCase()}/movie/${id}`
+            : `/comingsoon/movie/${id}`;
+
         navigate(route, {
             state: {
-                location: isNowPlaying ? selectedLocation : 'Coming Soon', // Provide context
+                location: isNowPlaying ? selectedLocation : 'Coming Soon',
                 id,
                 name: movieName,
                 ticketsAvailable: movieTickets,
@@ -47,7 +56,6 @@ const Movies = () => {
             },
         });
     };
-
 
     return (
         <Container className="container-lg">
@@ -75,10 +83,10 @@ const Movies = () => {
                             {selectedLocation}
                         </Dropdown.Toggle>
                         <Dropdown.Menu className="inner-dropdown">
-                            <Dropdown.Item onClick={() => setSelectedLocation('Roundrock')}>
+                            <Dropdown.Item onClick={() => handleLocationChange('Roundrock')}>
                                 Round Rock
                             </Dropdown.Item>
-                            <Dropdown.Item onClick={() => setSelectedLocation('Mueller')}>
+                            <Dropdown.Item onClick={() => handleLocationChange('Mueller')}>
                                 Mueller
                             </Dropdown.Item>
                         </Dropdown.Menu>
@@ -92,7 +100,7 @@ const Movies = () => {
                             <a
                                 href="#"
                                 onClick={(e) =>
-                                    handleMovieClick(e, selectedLocation, movie.id, movie.title, movie.ticketsAvailable, isNowPlaying)
+                                    handleMovieClick(e, movie.id, movie.title, movie.ticketsAvailable, isNowPlaying)
                                 }
                             >
                                 <img

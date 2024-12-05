@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import HeaderBar from '../Navbar/Navbar';
-import Movies from '../Movies/Movies';
-import Jumbo from '../Jumbo/Jumbo';
+import HeaderBar from '../../components/Navbar/Navbar';
+import Movies from '../../components/Movies/Movies';
+import Jumbo from '../../components/Jumbo/Jumbo';
 
 const HomePage = () => {
     return (
