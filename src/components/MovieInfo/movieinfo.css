@@ -39,8 +39,8 @@
 .specific-movie-info-inner-col{
     display: flex;
     gap: 2em;
-    margin-left: 10vw;
-    margin-right: 10vw;
+    margin-left: 21vw;
+    margin-right: 21vw;
     
 }
 
@@ -67,6 +67,10 @@
     background: none;
     border-color: white;
 }
+
+.specific-movie-description{
+    margin-top: 1.5em;
+}
 @media  screen and (max-width: 750px) {
     .specific-movie-info-inner-col{
         display: flex;
@@ -76,6 +80,14 @@
     .specific-movie-info-inner-col > img{
         display: none;
     
+    }
+
+}
+
+@media  screen and (max-width: 1150px){
+    .specific-movie-info-inner-col{
+        margin-left: 5vw;
+        margin-right: 5vw;
     }
 
 }

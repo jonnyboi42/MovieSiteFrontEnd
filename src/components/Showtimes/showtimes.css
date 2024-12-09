@@ -1,36 +1,51 @@
+.showtimes {
+    display: flex;
+    justify-content:center;
+    flex-wrap: wrap; /* Allows buttons to wrap to the next row */
+    gap: 1em; /* Adds spacing between buttons */
+    width: 100%; /* Ensures the container spans full width */
+    
+  }
 
+  #showtime-container > h1{
+    color: white;
+    font-family: "Titillium Web", serif;
+    border-bottom: 1px solid gray;
 
-.showtimes{
-display: flex;
-justify-content: center;
-flex-wrap:wrap ;
-gap: 1em;
-
-}
-
-.showtime{
-padding-left: 1.5em;
-padding-right: 1.5em;
-padding-top: .3em;
-padding-bottom: .3em;
-background:none;
-border: 1px solid white;
-color: white;
-border-radius: 2px;
-font-size: 1.3rem;
-}
-
-#showtime-section{
-max-width: 70%;
-display: flex;
-justify-content: center;
-align-items: center;
-margin-top: 2em;
-}
+  }
+  
+  .showtime {
+    padding: 0.3em 1.5em; /* Combined shorthand for padding */
+    background: none;
+    border: 1px solid white;
+    color: white;
+    border-radius: 2px;
+    font-size: 1.1rem;
+    width: 30%; /* Makes buttons take 30% of the row width */
+    border-radius: 5px;
+  }
+  
+  #showtime-container {
+    max-width: 70%;
+    display: flex;flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2em;
+  }
+  
+  #showtime-section {
+    margin-top: 1em;
+    display: flex;
+    justify-content: center; /* Centers the .showtimes container */
+    width: 100%; /* Ensure section spans the full container width */
+  }
+  
 
 @media screen and (max-width: 700px){
-    #showtime-section{
+    #showtime-container{
         max-width: 100%;
     }
+
+
 }
   

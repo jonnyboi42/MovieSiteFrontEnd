@@ -1,45 +1,58 @@
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
 const Showtimes = () => {
+  // Redux selectors
+  const selectedLocation = useSelector((state) => state.movie.selectedLocation);
+  const selectedMovieId = useSelector((state) => state.movie.selectedMovieId);
 
+  // Local state to store fetched movies
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Fetch movies for the selected location
     const fetchMovies = async () => {
-        try {
-            const response = await axios.get('http://localhost:3000/roundrock'); // Added 'await' here
-            console.log(response.data); // Log the data, not the entire response
-        } catch (error) {
-            console.error('Error Fetching Data:', error);
-        }
+      try {
+        console.log(selectedLocation);
+        console.log(selectedMovieId);
+        const response = await axios.get(`http://localhost:3000/${selectedLocation}`);
+        setMovies(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching movies:', error);
+        setLoading(false);
+      }
     };
 
-    fetchMovies(); // Call the async function
-  }, []); // Dependency array ensures the effect runs once on mount
+    fetchMovies();
+  }, [selectedLocation]); // Re-fetch if location changes
+
+  // Find the selected movie
+  const selectedMovie = movies.find((movie) => movie.id === selectedMovieId);
 
   return (
-    
-    <Container id='showtime-section'>
-      <section >
-      <div className="showtimes">
-        <button className='showtime'>12:45</button>
-        <button className='showtime'>12:45</button>
-        <button className='showtime'>12:45</button>
-        <button className='showtime'>12:45</button>
-        <button className='showtime'>12:45</button>
-        <button className='showtime'>12:45</button>
-        
-        
-      </div>
-    </section>
-
+    <Container id="showtime-container">
+      <h1>Showtimes</h1>
+      
+      {loading ? (
+        <p>Loading showtimes...</p>
+      ) : selectedMovie ? (
+        <section id="showtime-section">
+          <div className="showtimes">
+            {selectedMovie.showtimes.map((time, index) => (
+              <button key={index} className="showtime">
+                {time}
+              </button>
+            ))}
+          </div>
+        </section>
+      ) : (
+        <p>No showtimes available for the selected movie.</p>
+      )}
     </Container>
-    
   );
 };
 

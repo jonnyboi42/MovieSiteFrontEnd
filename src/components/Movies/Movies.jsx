@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setLocation } from '../../redux/movieSlice'; // Import Redux action
+import { setLocation, setMovie, setMovieId } from '../../redux/movieSlice';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -12,17 +12,27 @@ const Movies = () => {
     const navigate = useNavigate();
 
     // Get the location from Redux state
-    const selectedLocation = useSelector((state) => state.movie.selectedLocation) || 'Roundrock';
+    const selectedLocation = useSelector((state) => state.movie.selectedLocation);
+    const selectedMovie = useSelector((state) => state.movie.selectedMovie);
+    const selectedMovieId = useSelector((state) => state.movie.selectedMovieId);
 
     // Local state for Now Playing or Coming Soon
     const [isNowPlaying, setIsNowPlaying] = React.useState(true);
     const [movies, setMovies] = React.useState([]);
 
+    // Initialize the location in Redux state on mount if not set
+    useEffect(() => {
+        if (!selectedLocation) {
+            dispatch(setLocation('Roundrock')); // Set a default location
+        }
+    }, [dispatch, selectedLocation]);
+
+    // Fetch movies based on the location and category
     useEffect(() => {
         const fetchMovies = async () => {
             try {
                 const endpoint = isNowPlaying
-                    ? `http://localhost:3000/${selectedLocation}`
+                    ? `http://localhost:3000/${selectedLocation || 'Roundrock'}`
                     : `http://localhost:3000/comingsoon`;
                 const response = await fetch(endpoint);
                 const data = await response.json();
@@ -35,13 +45,16 @@ const Movies = () => {
         fetchMovies();
     }, [selectedLocation, isNowPlaying]);
 
+    // Handle location change from dropdown
     const handleLocationChange = (location) => {
         dispatch(setLocation(location)); // Update location in Redux store
     };
 
+    // Handle movie click
     const handleMovieClick = (e, id, movieName, movieTickets, isNowPlaying) => {
         e.preventDefault();
-
+        dispatch(setMovie(movieName)); // Update selected movie in Redux store
+        dispatch(setMovieId(id));
         const route = isNowPlaying
             ? `/${selectedLocation.toLowerCase()}/movie/${id}`
             : `/comingsoon/movie/${id}`;
@@ -65,14 +78,20 @@ const Movies = () => {
                         <a
                             href="#"
                             className={`lead nowplaying ${isNowPlaying ? 'active' : ''}`}
-                            onClick={(e) => { e.preventDefault(); setIsNowPlaying(true); }}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setIsNowPlaying(true);
+                            }}
                         >
                             NOW PLAYING
                         </a>
                         <a
                             href="#"
                             className={`lead comingsoon ${!isNowPlaying ? 'active' : ''}`}
-                            onClick={(e) => { e.preventDefault(); setIsNowPlaying(false); }}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setIsNowPlaying(false);
+                            }}
                         >
                             COMING SOON
                         </a>
@@ -80,7 +99,7 @@ const Movies = () => {
 
                     <Dropdown className="location-dropdown">
                         <Dropdown.Toggle variant="success" id="dropdown-basic" className="location-field">
-                            {selectedLocation}
+                            {selectedLocation || 'Roundrock'}
                         </Dropdown.Toggle>
                         <Dropdown.Menu className="inner-dropdown">
                             <Dropdown.Item onClick={() => handleLocationChange('Roundrock')}>
@@ -100,7 +119,13 @@ const Movies = () => {
                             <a
                                 href="#"
                                 onClick={(e) =>
-                                    handleMovieClick(e, movie.id, movie.title, movie.ticketsAvailable, isNowPlaying)
+                                    handleMovieClick(
+                                        e,
+                                        movie.id,
+                                        movie.title,
+                                        movie.ticketsAvailable,
+                                        isNowPlaying
+                                    )
                                 }
                             >
                                 <img
