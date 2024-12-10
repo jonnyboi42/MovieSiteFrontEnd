@@ -1,0 +1,24 @@
+.purchase-ticket-info{
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgb(215, 15, 15);
+    border-radius: 5px;
+    font-family: "Titillium Web", sans-serif;
+    color: white;
+}
+
+.purchase-ticket-info{
+    text-align: center;
+}
+
+.purchase-button{
+    background: none;
+    border: 1px solid white;
+    color: white;
+    font-size: 1.4rem;
+    padding-left: 1em;
+    padding-right: 1em;
+}
