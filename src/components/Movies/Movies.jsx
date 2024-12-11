@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setLocation, setMovie, setMovieId } from '../../redux/movieSlice';
+import { setLocation, setMovie, setMovieId, setSelectedMovieTicketPrice } from '../../redux/movieSlice';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -11,7 +11,7 @@ const Movies = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    // Get the location from Redux state
+    // Get the Currently Selected Movie Data from Redux state
     const selectedLocation = useSelector((state) => state.movie.selectedLocation);
     const selectedMovie = useSelector((state) => state.movie.selectedMovie);
     const selectedMovieId = useSelector((state) => state.movie.selectedMovieId);
@@ -51,10 +51,12 @@ const Movies = () => {
     };
 
     // Handle movie click
-    const handleMovieClick = (e, id, movieName, movieTickets, isNowPlaying) => {
+    const handleMovieClick = (e, id, movieName, movieTickets, isNowPlaying, ticketPrice) => {
         e.preventDefault();
         dispatch(setMovie(movieName)); // Update selected movie in Redux store
         dispatch(setMovieId(id));
+        dispatch(setSelectedMovieTicketPrice(ticketPrice));
+
         const route = isNowPlaying
             ? `/${selectedLocation.toLowerCase()}/movie/${id}`
             : `/comingsoon/movie/${id}`;
@@ -124,7 +126,9 @@ const Movies = () => {
                                         movie.id,
                                         movie.title,
                                         movie.ticketsAvailable,
-                                        isNowPlaying
+                                        isNowPlaying,
+                                        movie.ticketPrice,
+                            
                                     )
                                 }
                             >

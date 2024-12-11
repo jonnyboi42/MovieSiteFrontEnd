@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import Container from 'react-bootstrap/Container';
+import { setSelectedMovieTime } from '../../redux/movieSlice';
 
 const Showtimes = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   // Redux selectors
   const selectedLocation = useSelector((state) => state.movie.selectedLocation);
   const selectedMovieId = useSelector((state) => state.movie.selectedMovieId);
@@ -30,6 +35,14 @@ const Showtimes = () => {
     fetchMovies();
   }, [selectedLocation]); // Re-fetch if location changes
 
+  const handleShowTimeClick = (e, showTime) => {
+    e.preventDefault(); // Prevent default action of the event
+    dispatch(setSelectedMovieTime(showTime));
+    console.log('Showtime Selected:', showTime);
+    
+    navigate('/purchase');
+  };
+
   // Find the selected movie
   const selectedMovie = movies.find((movie) => movie.id === selectedMovieId);
 
@@ -43,7 +56,11 @@ const Showtimes = () => {
         <section id="showtime-section">
           <div className="showtimes">
             {selectedMovie.showtimes.map((time, index) => (
-              <button key={index} className="showtime">
+              <button 
+                key={index} 
+                className="showtime" 
+                onClick={(e) => handleShowTimeClick(e, time)} // Pass both event and time
+              >
                 {time}
               </button>
             ))}
