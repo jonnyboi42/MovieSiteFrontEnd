@@ -40,13 +40,17 @@ const PurchaseTicket = () => {
         <Col lg={6} className='mx-auto'>
           <div className='purchase-ticket-info'>
             <h1>PURCHASE TICKETS</h1>
-            <p><span className='movie-location'>{movieLocation}</span>- {movieName}</p>
-            <p>Showtime: {movieShowTime}</p>
             
-            <p> <img src={ticketIcon} alt="" /> Adult Tickets : x{ticketCount}</p>
-            <p>Subtotal: ${(ticketCount * movieTicketPrice).toFixed(2)}</p>
-            <p>Tax: ${(ticketCount * movieTicketPrice * taxRate).toFixed(2)}</p>
-            <p> <img src={moneyIcon} alt="" /> Total: ${totalPrice}</p>
+            <p><span className='description'>{movieLocation}</span>- {movieName}</p>
+            <p><span className='description'>Showtime:</span> {movieShowTime}</p>
+
+            
+            
+            
+            <p>  <span className='description'>Adult Tickets</span>  x{ticketCount}</p>
+            <p><span className='description'>Subtotal:</span> ${(ticketCount * movieTicketPrice).toFixed(2)}</p>
+            <p><span className='description'>Tax</span> ${(ticketCount * movieTicketPrice * taxRate).toFixed(2)}</p>
+            <p> <span className='description'>Total:</span> ${totalPrice}</p>
 
             <Form>
               <Form.Group>

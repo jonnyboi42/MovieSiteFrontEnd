@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+/* font-family: "Roboto", sans-serif; */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+/* font-family: "Inter", sans-serif; */
+
+
 .purchase-ticket-info {
     padding: 1em;
     display: flex;
@@ -5,12 +12,13 @@
     justify-content: center;
     align-items: center;
     border: 1px solid rgb(252, 252, 252);
-    border-radius: 5px;
-    font-family: "Titillium Web", sans-serif;
+    border-radius: 20px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 200;
     color: white;
     text-align: center;
     position: relative; /* To position the overlay */
-    /* background: url('https://cdn.prod.website-files.com/5a9ee6416e90d20001b20038/64f5dc75d0f286c98c7b4968_Rectangle%20(55).svg') center/cover no-repeat; */
+    background: url('https://img.freepik.com/premium-photo/abstract-red-wave-background-red-color-digital-technology-dots-wave-background_799261-18.jpg') center/cover no-repeat;
 }
 
 .purchase-ticket-info::before {
@@ -32,16 +40,27 @@
 
 .purchase-ticket-info > h1:nth-of-type(1){
     border-bottom: 1px solid gray;
+    font-weight: 300;
 }
 
-.movie-location{
-    color: rgb(171, 167, 167);
-    font-size: 1.5rem;
-}
 
-.purchase-ticket-info > p:nth-of-type(1){
+
+.purchase-ticket-info > p:nth-of-type(3){
     font-size: 1.7rem;
+    color: red;
 }
+.purchase-ticket-info > p:nth-of-type(6){
+    font-size: 2rem;
+    color: red;
+}
+
+.description{
+    color: rgb(221, 216, 216);
+    font-size: 1.2rem;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+}
+
 
 .purchase-button {
     background: none;
