@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setLocation, setMovie, setMovieId, setSelectedMovieTicketPrice } from '../../redux/movieSlice';
+import { setLocation, setSelectedMovie } from '../../redux/movieSlice';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -11,10 +11,8 @@ const Movies = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    // Get the Currently Selected Movie Data from Redux state
+    // Get the currently selected movie data from Redux state
     const selectedLocation = useSelector((state) => state.movie.selectedLocation);
-    const selectedMovie = useSelector((state) => state.movie.selectedMovie);
-    const selectedMovieId = useSelector((state) => state.movie.selectedMovieId);
 
     // Local state for Now Playing or Coming Soon
     const [isNowPlaying, setIsNowPlaying] = React.useState(true);
@@ -51,22 +49,29 @@ const Movies = () => {
     };
 
     // Handle movie click
-    const handleMovieClick = (e, id, movieName, movieTickets, isNowPlaying, ticketPrice) => {
+    const handleMovieClick = (e, movie) => {
         e.preventDefault();
-        dispatch(setMovie(movieName)); // Update selected movie in Redux store
-        dispatch(setMovieId(id));
-        dispatch(setSelectedMovieTicketPrice(ticketPrice));
+        dispatch(
+            setSelectedMovie({
+                id: movie.id,
+                name: movie.title,
+                ticketPrice: movie.ticketPrice,
+                showTime: movie.showTime,
+                director: movie.director,
+                runtime: movie.runtime,
+            })
+        );
 
         const route = isNowPlaying
-            ? `/${selectedLocation.toLowerCase()}/movie/${id}`
-            : `/comingsoon/movie/${id}`;
+            ? `/${selectedLocation.toLowerCase()}/movie/${movie.id}`
+            : `/comingsoon/movie/${movie.id}`;
 
         navigate(route, {
             state: {
                 location: isNowPlaying ? selectedLocation : 'Coming Soon',
-                id,
-                name: movieName,
-                ticketsAvailable: movieTickets,
+                id: movie.id,
+                name: movie.title,
+                ticketsAvailable: movie.ticketsAvailable,
                 category: isNowPlaying ? 'Now Playing' : 'Coming Soon',
             },
         });
@@ -121,15 +126,7 @@ const Movies = () => {
                             <a
                                 href="#"
                                 onClick={(e) =>
-                                    handleMovieClick(
-                                        e,
-                                        movie.id,
-                                        movie.title,
-                                        movie.ticketsAvailable,
-                                        isNowPlaying,
-                                        movie.ticketPrice,
-                            
-                                    )
+                                    handleMovieClick(e, movie)
                                 }
                             >
                                 <img

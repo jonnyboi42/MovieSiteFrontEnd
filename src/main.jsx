@@ -40,6 +40,7 @@ import './components/Jumbo/jumbo.css';
 import './components/MovieInfo/movieinfo.css';
 import './components/Showtimes/showtimes.css';
 import './components/PurchaseTicket/purchaseticket.css'
+import './components/PurchaseTickets/purchasetickets.css'
 import './components/MediaQueries/mediaqueries.css';
 
 import App from './App.jsx';

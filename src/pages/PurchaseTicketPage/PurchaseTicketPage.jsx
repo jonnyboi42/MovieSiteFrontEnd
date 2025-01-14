@@ -1,11 +1,11 @@
 import React from 'react'
 import HeaderBar from '../../components/Navbar/Navbar'
-import PurchaseTicket from '../../components/PurchaseTicket/PurchaseTicket'
+import PurchaseTickets from '../../components/PurchaseTickets/PurchaseTickets'
 const PurchaseTicketPage = () => {
   return (
     <>
     <HeaderBar/>
-    <PurchaseTicket/>
+    <PurchaseTickets/>
     </>
   )
 }
