@@ -82,17 +82,20 @@
 
 /* -------Ticket Controls Styling ------*/
 
+
 .ticket-controls{
     margin-top: 1em;
 }
 .ticket-controls button {
+  
     border-radius: 50%; /* Makes the buttons rounded */
     border: 2px solid rgb(214, 213, 213); /* Adds a red border */
     color: white; /* Text color */
     background-color: transparent; /* Transparent background for better styling */
     width: 40px; /* Set width for consistent circular buttons */
     height: 40px; /* Set height for consistent circular buttons */
-    display: inline-flex; /* Ensures alignment */
+    color: white;
+    display: inline-flex;
     align-items: center; /* Centers content vertically */
     justify-content: center; /* Centers content horizontally */
     font-size: 1.2rem; /* Increases font size */
@@ -108,4 +111,60 @@
   .ticket-controls span {
     margin: 0 10px; /* Adjust spacing between the buttons */
     font-size: 1.2rem; /* Matches button font size */
+  }
+
+
+  /* Voucher Accordian Styling */
+
+  
+  .accordian-header{
+    background-color: black;
+    border: 1px solid white;
+    text-align: center;
+    
+  }
+
+  .accordion-item:last-of-type>.accordion-header .accordion-button.collapsed {
+    background-color: black;
+    color: white;
+    
+  }
+
+  .accordion-item:first-of-type>.accordion-header .accordion-button{
+    background-color: black;
+    color: white;
+    font-family: 'Exo 2', serif;
+    
+  }
+  
+  .accordion-item:last-of-type>.accordion-collapse{
+    background-color: black;
+    color: white;
+  }
+  
+  .voucher-button {
+    border: 1px solid rgb(122, 119, 119);
+    background-color: black;
+    color: white;
+    transition: background-color 0.8s ease, border-color 0.3s ease, color 0.3s ease; /* Add transition here */
+  }
+  
+  .voucher-button:hover {
+    background-color: rgb(244, 244, 244);
+    border-color: gray;
+    color: black;
+  }
+  
+  .accordian-button{
+    color: white;
+  }
+
+  .accordion-button:not(.collapsed){
+    background-color: white;
+  }
+
+
+  .form-control:focus {
+    background-color: #e6e6e6; /* Change this to your desired color when input is focused */
+    border-color: #007bff; /* Optional: Change the border color when focused */
   }
