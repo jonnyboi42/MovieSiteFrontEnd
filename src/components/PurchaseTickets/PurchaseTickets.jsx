@@ -15,6 +15,7 @@ const PurchaseTickets = () => {
   const movieShowTime = useSelector((state) => state.movie.selectedMovie.showTime);
   const movieID = useSelector((state) => state.movie.selectedMovie.id);
   const movieRunTime = useSelector((state) => state.movie.selectedMovie.runtime);
+  const movieCategory = useSelector((state) => state.movie.category);  // Assuming 'category' is available in the movie object
 
   // Component state
   const [ticketCount, setTicketCount] = useState(0);
@@ -24,16 +25,22 @@ const PurchaseTickets = () => {
   const [voucherCode, setVoucherCode] = useState("");
   const [voucherApplied, setVoucherApplied] = useState(false);
 
-
-
   // Fetch movie image
   useEffect(() => {
     const fetchMovieImg = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:3000/${movieLocation.toLowerCase()}/movie/${movieID}`
-        );
+        let url;
+
+        // Check if the category is "Coming Soon"
+        if (movieCategory === "Coming Soon") {
+          url = `http://localhost:3000/comingsoon/movie/${movieID}`;
+        } else {
+          url = `http://localhost:3000/${movieLocation.toLowerCase()}/movie/${movieID}`;
+        }
+
+        const response = await fetch(url);
         const data = await response.json();
+        console.log(data);
         setMovieImg(data);
       } catch (error) {
         console.error("Error fetching image:", error);
@@ -43,7 +50,7 @@ const PurchaseTickets = () => {
     if (movieID && movieLocation) {
       fetchMovieImg();
     }
-  }, [movieID, movieLocation]);
+  }, [movieID, movieLocation, movieCategory]);
 
   // Update total price
   useEffect(() => {
@@ -143,6 +150,11 @@ const PurchaseTickets = () => {
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
+          
+          <Button className="purchase-ticket-button" >
+              Purchase Tickets
+          </Button>
+          
         </Col>
       </Row>
     </Container>

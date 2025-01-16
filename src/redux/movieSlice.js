@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     selectedLocation: null, // Tracks the currently selected location
+    category: "Now Playing", // Tracks the current category of movies (e.g., "Now Playing" or "Coming Soon")
+
     selectedMovie: {
         id: "",
         name: "",
@@ -21,6 +23,12 @@ const movieSlice = createSlice({
         setLocation: (state, action) => {
             state.selectedLocation = action.payload;
         },
+
+        //Category Management 
+        setCategory: (state, action) =>{
+            state.category = action.payload;
+        },
+
         // Update selected movie details
         setSelectedMovie: (state, action) => {
             const { id, name, ticketPrice, showTime, director, runtime } = action.payload;
@@ -36,5 +44,5 @@ const movieSlice = createSlice({
     },
 });
 
-export const { setLocation, setSelectedMovie } = movieSlice.actions;
+export const { setLocation, setCategory, setSelectedMovie } = movieSlice.actions;
 export default movieSlice.reducer;

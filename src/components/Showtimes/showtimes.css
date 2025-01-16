@@ -23,6 +23,12 @@
     font-size: 1.1rem;
     width: 30%; /* Makes buttons take 30% of the row width */
     border-radius: 5px;
+    transition: all 0.3s ease; /* Transition for all properties with a 0.3s duration */
+  }
+
+  .showtime:hover {
+    border: 1px solid rgb(99, 99, 99); /* Red border on hover */
+    background-color: rgb(255, 0, 0); /* Grey background on hover */
   }
   
   #showtime-container {

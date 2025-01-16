@@ -71,6 +71,10 @@
 .specific-movie-description{
     margin-top: 1.5em;
 }
+
+
+  
+ 
 @media  screen and (max-width: 750px) {
     .specific-movie-info-inner-col{
         display: flex;

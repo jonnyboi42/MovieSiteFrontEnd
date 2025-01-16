@@ -157,6 +157,7 @@
   
   .accordian-button{
     color: white;
+    text-align: center;
   }
 
   .accordion-button:not(.collapsed){
@@ -167,4 +168,19 @@
   .form-control:focus {
     background-color: #e6e6e6; /* Change this to your desired color when input is focused */
     border-color: #007bff; /* Optional: Change the border color when focused */
+  }
+
+
+  .purchase-ticket-button{
+    margin-top: 1em;
+    background-color: black;
+    border: 2px solid white;
+    color: white;
+    width: 50%;
+    border-color: rgb(255, 0, 0);
+    
+  }
+
+  .accordion-button::after {
+    display: none !important;
   }

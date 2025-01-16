@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setLocation, setSelectedMovie } from '../../redux/movieSlice';
+import { setLocation, setSelectedMovie, setCategory } from '../../redux/movieSlice';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -13,10 +13,10 @@ const Movies = () => {
 
     // Get the currently selected movie data from Redux state
     const selectedLocation = useSelector((state) => state.movie.selectedLocation);
+    const selectedCategory = useSelector((state) => state.movie.category);
 
-    // Local state for Now Playing or Coming Soon
-    const [isNowPlaying, setIsNowPlaying] = React.useState(true);
     const [movies, setMovies] = React.useState([]);
+    const [error, setError] = React.useState(null);
 
     // Initialize the location in Redux state on mount if not set
     useEffect(() => {
@@ -29,19 +29,24 @@ const Movies = () => {
     useEffect(() => {
         const fetchMovies = async () => {
             try {
-                const endpoint = isNowPlaying
+                const endpoint = selectedCategory === "Now Playing"
                     ? `http://localhost:3000/${selectedLocation || 'Roundrock'}`
                     : `http://localhost:3000/comingsoon`;
                 const response = await fetch(endpoint);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch movies');
+                }
                 const data = await response.json();
                 setMovies(data);
+                setError(null);  // Reset error if successful
             } catch (error) {
                 console.error('Error fetching data:', error);
+                setError(error.message);  // Set error state
             }
         };
 
         fetchMovies();
-    }, [selectedLocation, isNowPlaying]);
+    }, [selectedLocation, selectedCategory]); // Use selectedCategory here
 
     // Handle location change from dropdown
     const handleLocationChange = (location) => {
@@ -62,42 +67,43 @@ const Movies = () => {
             })
         );
 
-        const route = isNowPlaying
+        const route = selectedCategory === 'Now Playing'
             ? `/${selectedLocation.toLowerCase()}/movie/${movie.id}`
             : `/comingsoon/movie/${movie.id}`;
 
         navigate(route, {
             state: {
-                location: isNowPlaying ? selectedLocation : 'Coming Soon',
+                location: selectedCategory,
                 id: movie.id,
                 name: movie.title,
                 ticketsAvailable: movie.ticketsAvailable,
-                category: isNowPlaying ? 'Now Playing' : 'Coming Soon',
+                category: selectedCategory,
             },
         });
     };
 
     return (
         <Container className="container-lg">
+            {error && <div className="error-message">{error}</div>} {/* Display error if present */}
             <Row>
                 <Col className="col-12 options">
                     <div className="now-playing-coming-soon">
                         <a
                             href="#"
-                            className={`lead nowplaying ${isNowPlaying ? 'active' : ''}`}
+                            className={`lead nowplaying ${selectedCategory === 'Now Playing' ? 'active' : ''}`}
                             onClick={(e) => {
                                 e.preventDefault();
-                                setIsNowPlaying(true);
+                                dispatch(setCategory('Now Playing'));
                             }}
                         >
                             NOW PLAYING
                         </a>
                         <a
                             href="#"
-                            className={`lead comingsoon ${!isNowPlaying ? 'active' : ''}`}
+                            className={`lead comingsoon ${selectedCategory !== 'Now Playing' ? 'active' : ''}`}
                             onClick={(e) => {
                                 e.preventDefault();
-                                setIsNowPlaying(false);
+                                dispatch(setCategory('Coming Soon'));
                             }}
                         >
                             COMING SOON
