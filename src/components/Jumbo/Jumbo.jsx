@@ -81,7 +81,7 @@ const Jumbo = () => {
     <div id="carouselExampleControls" className="carousel slide custom-jumbotron" data-bs-ride="carousel">
       <div className="carousel-inner">
         <div className="carousel-item active">
-          <img className="d-block w-100" src="public/assets/imgs/jumbo/spidermanjumbo.jpg" alt="Third slide" />
+          <img className="d-block w-100" src="/assets/imgs/jumbo/spidermanjumbo.jpg" alt="Third slide" />
           <div className="release-date">NOW PLAYING</div>
           <div className="carousel-caption spiderman">
             {/* <h5>SPIDERMAN 2</h5> */}
@@ -89,7 +89,7 @@ const Jumbo = () => {
           </div>
         </div>
         <div className="carousel-item">
-          <img className="d-block w-100" src="public/assets/imgs/jumbo/prometheusjumbo.jpg" alt="Second slide" />
+          <img className="d-block w-100" src="/assets/imgs/jumbo/prometheusjumbo.jpg" alt="Second slide" />
           <div className="release-date">COMING SOON</div>
           <div className="carousel-caption">
             {/* <h5>PROMETHEUS</h5> */}
@@ -97,7 +97,7 @@ const Jumbo = () => {
           </div>
         </div>
         <div className="carousel-item ">
-          <img className="d-block w-100" src="public/assets/imgs/jumbo/bladerunnerjumbo.jpg" alt="First slide" />
+          <img className="d-block w-100" src="/assets/imgs/jumbo/bladerunnerjumbo.jpg" alt="First slide" />
           <div className="release-date">NOW PLAYING</div>
           <div className="carousel-caption starwars">
             {/* <h5>BLADE RUNNER 2049</h5> */}
