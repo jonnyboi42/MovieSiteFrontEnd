@@ -2,6 +2,11 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
+// Import images
+import spidermanImg from 'src/assets/imgs/jumbo/spidermanjumbo.jpg';
+import prometheusImg from 'src/assets/imgs/jumbo/prometheusjumbo.jpg';
+import bladerunnerImg from 'src/assets/imgs/jumbo/bladerunnerjumbo.jpg';
+
 const getRandomDate = () => {
   const start = new Date(2015, 0, 1);
   const end = new Date(2024, 11, 31);
@@ -14,7 +19,7 @@ const Jumbo = () => {
     <div id="carouselExampleControls" className="carousel slide custom-jumbotron" data-bs-ride="carousel">
       <div className="carousel-inner">
         <div className="carousel-item active">
-          <img className="d-block w-100" src="src/assets/imgs/jumbo/spidermanjumbo.jpg" alt="Third slide" />
+          <img className="d-block w-100" src={spidermanImg} alt="Third slide" />
           <div className="release-date">NOW PLAYING</div>
           <div className="carousel-caption spiderman">
             {/* <h5>SPIDERMAN 2</h5> */}
@@ -22,22 +27,21 @@ const Jumbo = () => {
           </div>
         </div>
         <div className="carousel-item">
-          <img className="d-block w-100" src="src/assets/imgs/jumbo/prometheusjumbo.jpg" alt="Second slide" />
+          <img className="d-block w-100" src={prometheusImg} alt="Second slide" />
           <div className="release-date">COMING SOON</div>
           <div className="carousel-caption">
             {/* <h5>PROMETHEUS</h5> */}
             {/* <button>TICKETS</button> */}
           </div>
         </div>
-        <div className="carousel-item ">
-          <img className="d-block w-100" src="src/assets/imgs/jumbo/bladerunnerjumbo.jpg" alt="First slide" />
+        <div className="carousel-item">
+          <img className="d-block w-100" src={bladerunnerImg} alt="First slide" />
           <div className="release-date">NOW PLAYING</div>
           <div className="carousel-caption starwars">
             {/* <h5>BLADE RUNNER 2049</h5> */}
             {/* <button>TICKETS</button> */}
           </div>
         </div>
-
       </div>
       <a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
         <span className="carousel-control-prev-icon" aria-hidden="true"></span>

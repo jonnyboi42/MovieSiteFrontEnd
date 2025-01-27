@@ -99,6 +99,7 @@ const PurchaseTickets = () => {
   
       if (response.ok) {
         const discount = parseFloat(data.discount);
+        console.log(discount);
   
         if (!isNaN(discount) && discount > 0) {
           setTotalPrice((prevPrice) => {
