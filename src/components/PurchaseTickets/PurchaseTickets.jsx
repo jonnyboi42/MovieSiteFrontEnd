@@ -1,23 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux"; // Import useDispatch
+import { useNavigate } from 'react-router-dom';
 import { Accordion, Form } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { setCart } from "../../redux/cartSlice"; // Import the setCart action
 
 const PurchaseTickets = () => {
-  // Redux state
+  const dispatch = useDispatch(); // Initialize dispatch
+  const navigate = useNavigate();
+
+  // Accessing the necessary data from the Redux store
   const movieLocation = useSelector((state) => state.movie.selectedLocation);
   const movieName = useSelector((state) => state.movie.selectedMovie.name);
   const movieTicketPrice = useSelector((state) => state.movie.selectedMovie.ticketPrice);
   const movieShowTime = useSelector((state) => state.movie.selectedMovie.showTime);
   const movieID = useSelector((state) => state.movie.selectedMovie.id);
   const movieRunTime = useSelector((state) => state.movie.selectedMovie.runtime);
-  const movieCategory = useSelector((state) => state.movie.category);  // Assuming 'category' is available in the movie object
+  const movieCategory = useSelector((state) => state.movie.category);
 
-  // Component state
+  // Component-specific state
   const [ticketCount, setTicketCount] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0.0);
   const [taxRate] = useState(0.08);
@@ -25,22 +30,17 @@ const PurchaseTickets = () => {
   const [voucherCode, setVoucherCode] = useState("");
   const [voucherApplied, setVoucherApplied] = useState(false);
 
-  // Fetch movie image
   useEffect(() => {
     const fetchMovieImg = async () => {
       try {
         let url;
-
-        // Check if the category is "Coming Soon"
         if (movieCategory === "Coming Soon") {
-          url = `http://localhost:3000/comingsoon/movie/${movieID}`;
+          url = `https://moviesitebackend.onrender.com/comingsoon/movie/${movieID}`;
         } else {
-          url = `http://localhost:3000/${movieLocation.toLowerCase()}/movie/${movieID}`;
+          url = `https://moviesitebackend.onrender.com/${movieLocation.toLowerCase()}/movie/${movieID}`;
         }
-
         const response = await fetch(url);
         const data = await response.json();
-        console.log(data);
         setMovieImg(data);
       } catch (error) {
         console.error("Error fetching image:", error);
@@ -52,7 +52,6 @@ const PurchaseTickets = () => {
     }
   }, [movieID, movieLocation, movieCategory]);
 
-  // Update total price
   useEffect(() => {
     const subtotal = ticketCount * movieTicketPrice;
     const taxAmount = subtotal * taxRate;
@@ -61,17 +60,64 @@ const PurchaseTickets = () => {
   }, [ticketCount, movieTicketPrice, taxRate]);
 
   const handleIncrease = () => setTicketCount((prevCount) => prevCount + 1);
-  const handleDecrease = () =>
-    setTicketCount((prevCount) => (prevCount > 0 ? prevCount - 1 : 0));
+  const handleDecrease = () => setTicketCount((prevCount) => (prevCount > 0 ? prevCount - 1 : 0));
 
-  const handleVoucherApply = () => {
-    if (voucherCode.trim() === "DISCOUNT10" && !voucherApplied) {
-      setTotalPrice((prevPrice) => prevPrice * 0.9);
-      setVoucherApplied(true);
-    } else {
-      alert("Invalid or already applied voucher code.");
+  // Handle the purchase of tickets
+  const handlePurchaseTicket = (e) => {
+    e.preventDefault();
+    
+    // Dispatch the action to update the cart with movie, tickets, location, and price
+    dispatch(setCart({
+      movie: movieName,
+      tickets: ticketCount,
+      location: movieLocation,
+      price: totalPrice
+    }));
+    
+    // Optionally, you can display a confirmation message or redirect
+    alert("Tickets successfully added to the cart!");
+
+    navigate('/checkout')
+  };
+
+  const handleVoucherApply = async () => {
+    if (!voucherCode.trim()) {
+      alert("Please enter a voucher code.");
+      return;
+    }
+  
+    try {
+      const response = await fetch("https://moviesitebackend.onrender.com/api/vouchers/checkVoucher", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ voucherCode }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        const discount = parseFloat(data.discount);
+  
+        if (!isNaN(discount) && discount > 0) {
+          setTotalPrice((prevPrice) => {
+            const newPrice = prevPrice - discount;
+            return newPrice >= 0 ? newPrice : 0; // Prevent negative prices
+          });
+          setVoucherApplied(true);
+        } else {
+          alert("Invalid discount value.");
+        }
+      } else {
+        alert(data.error);
+      }
+    } catch (error) {
+      console.error("Error applying voucher:", error);
+      alert("Something went wrong. Please try again.");
     }
   };
+  
 
   return (
     <Container fluid className="purchase-tickets-container">
@@ -112,20 +158,17 @@ const PurchaseTickets = () => {
             <Button className="ticket-controls-button" onClick={handleIncrease}>
               +
             </Button>
-
             <p>
               <strong>TOTAL PRICE: </strong> ${totalPrice.toFixed(2)}
             </p>
           </div>
 
-          {/* Voucher Section */}
-          <Accordion className="mt-3 ">
+          <Accordion className="mt-3">
             <Accordion.Item eventKey="0">
               <Accordion.Header>USE A VOUCHER CODE</Accordion.Header>
               <Accordion.Body>
                 <Form>
                   <Form.Group controlId="voucherCode">
-                    {/* <Form.Label>Enter Voucher Code</Form.Label> */}
                     <Form.Control
                       type="text"
                       placeholder="Enter your voucher code"
@@ -135,26 +178,23 @@ const PurchaseTickets = () => {
                   </Form.Group>
                   <Button
                     variant="primary"
-                    className="mt-2 voucher-button "
+                    className="mt-2 voucher-button"
                     onClick={handleVoucherApply}
                     disabled={voucherApplied}
                   >
                     Apply Voucher
                   </Button>
                   {voucherApplied && (
-                    <p className="text-success mt-2">
-                      Voucher successfully applied!
-                    </p>
+                    <p className="text-success mt-2">Voucher successfully applied!</p>
                   )}
                 </Form>
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
           
-          <Button className="purchase-ticket-button" >
-              Purchase Tickets
+          <Button className="purchase-ticket-button" onClick={handlePurchaseTicket}>
+            Purchase Tickets
           </Button>
-          
         </Col>
       </Row>
     </Container>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setLocation, setSelectedMovie, setCategory } from '../../redux/movieSlice';
@@ -30,8 +30,8 @@ const Movies = () => {
         const fetchMovies = async () => {
             try {
                 const endpoint = selectedCategory === "Now Playing"
-                    ? `http://localhost:3000/${selectedLocation || 'Roundrock'}`
-                    : `http://localhost:3000/comingsoon`;
+                    ? `https://moviesitebackend.onrender.com/${selectedLocation || 'Roundrock'}`
+                    : `https://moviesitebackend.onrender.com/comingsoon`;
                 const response = await fetch(endpoint);
                 if (!response.ok) {
                     throw new Error('Failed to fetch movies');

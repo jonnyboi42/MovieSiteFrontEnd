@@ -7,7 +7,7 @@ const initialState = {
     selectedMovie: {
         id: "",
         name: "",
-        ticketPrice: "",
+        ticketPrice: 0,
         showTime: "",
         director: "",
         runtime: "",

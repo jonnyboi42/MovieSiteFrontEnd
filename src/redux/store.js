@@ -1,7 +1,7 @@
 // src/store.js
 // import { configureStore } from '@reduxjs/toolkit';
 import movieReducer from './movieSlice';
-
+import cartReducer from './cartSlice';
 
 import storage from 'redux-persist/lib/storage'; // Defaults to localStorage for web
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
@@ -26,6 +26,7 @@ const persistConfig = {
   // Combine reducers (in case you add more reducers in the future)
   const rootReducer = combineReducers({
     movie: movieReducer, // Add the movie reducer
+    cart: cartReducer, // Add the cart reducer
   });
   
   // Wrap the root reducer with persistReducer

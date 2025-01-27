@@ -20,7 +20,7 @@ const Showtimes = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/${selectedLocation}`);
+        const response = await axios.get(`https://moviesitebackend.onrender.com/${selectedLocation}`);
         setMovies(response.data);
         setLoading(false);
       } catch (error) {
