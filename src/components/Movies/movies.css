@@ -6,8 +6,11 @@ body{
 
 .options{
     display: flex;
-    align-items: baseline;
+    align-items: center;
+    margin-bottom: 1em;
     justify-content: space-between;
+    margin-top: .7em;
+    
 }
 
 .now-playing-coming-soon{
@@ -50,6 +53,9 @@ body{
     
 }
 
+button#dropdown-basic {
+    text-align: center;
+}
 
 /* Movie Card */
 .movie-card{
