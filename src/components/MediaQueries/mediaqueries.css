@@ -55,4 +55,11 @@
     button#dropdown-basic{
         width: 100%;
     }
+
+    .purchase-tickets-container .card-text-with-bg {
+        width: 20rem; /* Change to 20rem on smaller screens */
+    }
   }
+
+
+  
