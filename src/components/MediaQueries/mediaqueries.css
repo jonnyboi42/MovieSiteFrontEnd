@@ -38,6 +38,21 @@
 
   @media screen and (max-width: 375px){
     .now-playing-coming-soon > a{
-        font-size: .5em;
+        font-size: .8em;
+    }
+  }
+
+  @media screen and (max-width: 440px){
+    .options{
+        flex-direction: column;
+        gap: 1em;
+    }
+
+    .location-dropdown{
+        width: 80%;
+    }
+
+    button#dropdown-basic{
+        width: 100%;
     }
   }
