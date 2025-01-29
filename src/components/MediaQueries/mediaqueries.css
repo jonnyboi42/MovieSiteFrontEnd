@@ -40,10 +40,6 @@
     .now-playing-coming-soon > a{
         font-size: .8em;
     }
-
-    element.style{
-        width: auto ;
-    }
   }
 
   @media screen and (max-width: 440px){
@@ -60,7 +56,13 @@
         width: 100%;
     }
 
-  
+    .purchase-tickets-container .card-text-with-bg {
+        width: auto; /* Change to 20rem on smaller screens */
+    }
+
+    element.style{
+        width: auto;
+    }
   }
 
 
