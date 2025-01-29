@@ -36,13 +36,9 @@
   }
 
 
-  @media screen and (max-width: 375px){
-    .now-playing-coming-soon > a{
-        font-size: .8em;
-    }
-  }
+  
 
-  @media screen and (max-width: 440px){
+@media screen and (max-width: 440px){
     .options{
         flex-direction: column;
         gap: 1em;
@@ -56,14 +52,16 @@
         width: 100%;
     }
 
-    .purchase-tickets-container .card-text-with-bg {
-        width: auto; /* Change to 20rem on smaller screens */
-    }
-
-    element.style{
+    .card {
         width: auto;
     }
-  }
+}
+
+@media screen and (max-width: 375px){
+    .now-playing-coming-soon > a{
+        font-size: .8em;
+    }
+}
 
 
   
