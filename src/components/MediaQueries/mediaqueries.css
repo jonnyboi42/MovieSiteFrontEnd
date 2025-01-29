@@ -40,6 +40,10 @@
     .now-playing-coming-soon > a{
         font-size: .8em;
     }
+
+    element.style{
+        width: auto ;
+    }
   }
 
   @media screen and (max-width: 440px){
