@@ -65,7 +65,12 @@ const PurchaseTickets = () => {
   // Handle the purchase of tickets
   const handlePurchaseTicket = (e) => {
     e.preventDefault();
-    
+
+    if (ticketCount === 0) {
+      alert("Please select at least one ticket before purchasing.");
+      return;
+    }
+
     // Dispatch the action to update the cart with movie, tickets, location, and price
     dispatch(setCart({
       movie: movieName,
@@ -76,7 +81,6 @@ const PurchaseTickets = () => {
     
     // Optionally, you can display a confirmation message or redirect
     alert("Tickets successfully added to the cart!");
-
     navigate('/checkout')
   };
 
