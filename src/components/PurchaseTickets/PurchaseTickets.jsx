@@ -36,7 +36,7 @@ const PurchaseTickets = () => {
         let url;
         if (movieCategory === "Coming Soon") {
           if (movieLocation.toLowerCase() === "roundrock") {
-            url = `https://moviesitebackend.onrender.com/api/comingsoonroundrock/movie/${movieID}`;
+            url = `https://moviesitebackend.onrender.com/comingsoon/${selectedLocation.toLowerCase()}/movie/${id}`;
           } else if (movieLocation.toLowerCase() === "mueller") {
             url = `https://moviesitebackend.onrender.com/api/comingsoonmueller/movie/${movieID}`;
           }
