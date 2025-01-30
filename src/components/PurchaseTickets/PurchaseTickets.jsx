@@ -35,7 +35,11 @@ const PurchaseTickets = () => {
       try {
         let url;
         if (movieCategory === "Coming Soon") {
-          url = `https://moviesitebackend.onrender.com/api/comingsoon/movie/${movieID}`;
+          if (movieLocation.toLowerCase() === "roundrock") {
+            url = `https://moviesitebackend.onrender.com/api/comingsoonroundrock/movie/${movieID}`;
+          } else if (movieLocation.toLowerCase() === "mueller") {
+            url = `https://moviesitebackend.onrender.com/api/comingsoonmueller/movie/${movieID}`;
+          }
         } else {
           url = `https://moviesitebackend.onrender.com/api/${movieLocation.toLowerCase()}/movie/${movieID}`;
         }
@@ -46,11 +50,12 @@ const PurchaseTickets = () => {
         console.error("Error fetching image:", error);
       }
     };
-
+  
     if (movieID && movieLocation) {
       fetchMovieImg();
     }
   }, [movieID, movieLocation, movieCategory]);
+  
 
   useEffect(() => {
     const subtotal = ticketCount * movieTicketPrice;
