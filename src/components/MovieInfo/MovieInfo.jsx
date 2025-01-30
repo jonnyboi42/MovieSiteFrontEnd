@@ -22,9 +22,10 @@ const MovieInfo = () => {
                 console.log('Selected Category:', selectedMovieCategory);
 
                 let response;
+
                 if (selectedMovieCategory === 'Coming Soon') {
-                    // Fetch from the 'Coming Soon' route
-                    response = await fetch(`https://moviesitebackend.onrender.com/comingsoon/movie/${id}`);
+                    // Adjust fetch URL for the specific location of "Coming Soon"
+                    response = await fetch(`https://moviesitebackend.onrender.com/comingsoon${selectedLocation.toLowerCase()}/movie/${id}`);
                 } else {
                     // Fetch from location-specific route for "Now Playing"
                     response = await fetch(`https://moviesitebackend.onrender.com/${selectedLocation.toLowerCase()}/movie/${id}`);
