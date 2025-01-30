@@ -29,9 +29,15 @@ const Movies = () => {
     useEffect(() => {
         const fetchMovies = async () => {
             try {
-                const endpoint = selectedCategory === "Now Playing"
-                    ? `https://moviesitebackend.onrender.com/${selectedLocation || 'Roundrock'}`
-                    : `https://moviesitebackend.onrender.com/comingsoon`;
+                let endpoint;
+                if (selectedCategory === "Now Playing") {
+                    endpoint = `https://moviesitebackend.onrender.com/${selectedLocation || 'Roundrock'}`;
+                } else {
+                    endpoint = selectedLocation === 'Mueller'
+                        ? `https://moviesitebackend.onrender.com/comingsoonmueller`
+                        : `https://moviesitebackend.onrender.com/comingsoonroundrock`;
+                }
+                
                 const response = await fetch(endpoint);
                 if (!response.ok) {
                     throw new Error('Failed to fetch movies');
