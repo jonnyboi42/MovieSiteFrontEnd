@@ -19,7 +19,7 @@ const CheckoutInfo = () => {
 
   // Prefilled static values for other fields
   const prefilledData = {
-    creditCard: '**** **** **** 1234',
+    creditCard: '1234123412341234',
     billingAddress: '123 Main St, Apt 4B',
     state: 'CA',
     zip: '90210',
