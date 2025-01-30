@@ -31,11 +31,9 @@ const Movies = () => {
             try {
                 let endpoint;
                 if (selectedCategory === "Now Playing") {
-                    endpoint = `https://moviesitebackend.onrender.com/${selectedLocation || 'Roundrock'}`;
+                    endpoint = `https://moviesitebackend.onrender.com/${selectedLocation.toLowerCase()}`;
                 } else {
-                    endpoint = selectedLocation === 'Mueller'
-                        ? `https://moviesitebackend.onrender.com/comingsoonmueller`
-                        : `https://moviesitebackend.onrender.com/comingsoonroundrock`;
+                    endpoint = `https://moviesitebackend.onrender.com/comingsoon${selectedLocation.toLowerCase()}`;
                 }
                 
                 const response = await fetch(endpoint);
@@ -50,7 +48,7 @@ const Movies = () => {
                 setError(error.message);  // Set error state
             }
         };
-
+   
         fetchMovies();
     }, [selectedLocation, selectedCategory]); // Use selectedCategory here
 
