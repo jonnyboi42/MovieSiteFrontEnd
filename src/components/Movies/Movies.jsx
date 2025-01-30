@@ -33,7 +33,7 @@ const Movies = () => {
                 if (selectedCategory === "Now Playing") {
                     endpoint = `https://moviesitebackend.onrender.com/${selectedLocation.toLowerCase()}`;
                 } else {
-                    endpoint = `https://moviesitebackend.onrender.com/comingsoon${selectedLocation.toLowerCase()}`;
+                    endpoint = `https://moviesitebackend.onrender.com/comingsoon/${selectedLocation.toLowerCase()}`;
                 }
                 
                 const response = await fetch(endpoint);
