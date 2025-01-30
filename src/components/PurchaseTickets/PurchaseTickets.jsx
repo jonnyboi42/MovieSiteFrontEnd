@@ -36,10 +36,10 @@ const PurchaseTickets = () => {
         let url;
         if (movieCategory === "Coming Soon") {
           if (movieLocation.toLowerCase() === "roundrock") {
-          url = `https://moviesitebackend.onrender.com/comingsoon/${selectedLocation.toLowerCase()}/movie/${movieID}`;
+          url = `https://moviesitebackend.onrender.com/comingsoon/${movieLocation.toLowerCase()}/movie/${movieID}`;
 
           } else if (movieLocation.toLowerCase() === "mueller") {
-            url = `https://moviesitebackend.onrender.com/comingsoon/${selectedLocation.toLowerCase()}/movie/${movieID}`
+            url = `https://moviesitebackend.onrender.com/comingsoon/${movieLocation.toLowerCase()}/movie/${movieID}`
 
           }
         } else {
