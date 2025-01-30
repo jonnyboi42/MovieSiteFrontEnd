@@ -73,10 +73,12 @@ const Movies = () => {
             })
         );
 
+        // Determine route based on category and location
         const route = selectedCategory === 'Now Playing'
-            ? `/${selectedLocation.toLowerCase()}/movie/${movie.id}`
-            : `/comingsoon/movie/${movie.id}`;
-
+        ? `/${selectedLocation.toLowerCase()}/movie/${movie.id}`
+        : selectedLocation === 'Mueller'
+            ? `/comingsoonmueller/movie/${movie.id}`
+            : `/comingsoonroundrock/movie/${movie.id}`;
         navigate(route, {
             state: {
                 location: selectedCategory,
