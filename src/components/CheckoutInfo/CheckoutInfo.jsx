@@ -42,7 +42,7 @@ const CheckoutInfo = () => {
     };
 
     try {
-      const response = await fetch('https://moviesitebackend.onrender.com/api/checkoutinfo', {
+      const response = await fetch('https://moviesitebackend.onrender.com/api/checkoutinfo/saveCheckout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(checkoutData),
