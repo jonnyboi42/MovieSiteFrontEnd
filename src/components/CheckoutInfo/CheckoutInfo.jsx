@@ -5,35 +5,36 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-import { useSelector, useDispatch } from "react-redux"; // Import useDispatch
+import { useSelector } from "react-redux";
 
 const CheckoutInfo = () => {
-
-  const dispatch = useDispatch(); // Initialize dispatch
-
-  //Access the necessary Data From The Redux store
+  // Access necessary data from Redux store
   const movie = useSelector((state) => state.cart.movieCart.movie);
   const tickets = useSelector((state) => state.cart.movieCart.tickets);
   const location = useSelector((state) => state.cart.movieCart.location);
   const price = useSelector((state) => state.cart.movieCart.price);
 
-  // States for input fields
+  // User can only edit the name field
   const [name, setName] = useState('');
-  const [creditCard, setCreditCard] = useState('');
-  const [billingAddress, setBillingAddress] = useState('');
-  const [state, setState] = useState('');
-  const [zip, setZip] = useState('');
-  const [email, setEmail] = useState('');
+
+  // Prefilled static values for other fields
+  const prefilledData = {
+    creditCard: '**** **** **** 1234',
+    billingAddress: '123 Main St, Apt 4B',
+    state: 'CA',
+    zip: '90210',
+    email: 'user@example.com',
+  };
 
   // Handle form submission
   const handleCheckout = async () => {
     const checkoutData = {
       name,
-      credit_card: creditCard,
-      billing_address: billingAddress,
-      state,
-      zip,
-      email,
+      credit_card: prefilledData.creditCard,
+      billing_address: prefilledData.billingAddress,
+      state: prefilledData.state,
+      zip: prefilledData.zip,
+      email: prefilledData.email,
       movie,
       tickets,
       location,
@@ -43,22 +44,14 @@ const CheckoutInfo = () => {
     try {
       const response = await fetch('http://localhost:3000/api/checkoutinfo/saveCheckout', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(checkoutData),
       });
 
       if (response.ok) {
         const result = await response.json();
         alert(`Checkout successful! Your checkout ID is ${result.checkoutId}.`);
-        // Optionally, reset the form after a successful submission
         setName('');
-        setCreditCard('');
-        setBillingAddress('');
-        setState('');
-        setZip('');
-        setEmail('');
       } else {
         const errorData = await response.json();
         alert(`Error: ${errorData.error}`);
@@ -77,7 +70,7 @@ const CheckoutInfo = () => {
           <p>Name</p>
           <InputGroup className="mb-3">
             <Form.Control
-              placeholder="Name"
+              placeholder="Enter your name"
               aria-label="Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -88,10 +81,8 @@ const CheckoutInfo = () => {
           <p>Credit Card</p>
           <InputGroup className="mb-3">
             <Form.Control
-              placeholder="Credit Card"
-              aria-label="Credit Card"
-              value={creditCard}
-              onChange={(e) => setCreditCard(e.target.value)}
+              value={prefilledData.creditCard}
+              readOnly
             />
           </InputGroup>
         </Col>
@@ -101,10 +92,8 @@ const CheckoutInfo = () => {
           <p>Billing Address</p>
           <InputGroup className="mb-3">
             <Form.Control
-              placeholder="Billing Address"
-              aria-label="Billing Address"
-              value={billingAddress}
-              onChange={(e) => setBillingAddress(e.target.value)}
+              value={prefilledData.billingAddress}
+              readOnly
             />
           </InputGroup>
         </Col>
@@ -112,10 +101,8 @@ const CheckoutInfo = () => {
           <p>State</p>
           <InputGroup className="mb-3">
             <Form.Control
-              placeholder="State"
-              aria-label="State"
-              value={state}
-              onChange={(e) => setState(e.target.value)}
+              value={prefilledData.state}
+              readOnly
             />
           </InputGroup>
         </Col>
@@ -123,10 +110,8 @@ const CheckoutInfo = () => {
           <p>Zip</p>
           <InputGroup className="mb-3">
             <Form.Control
-              placeholder="Zip"
-              aria-label="Zip"
-              value={zip}
-              onChange={(e) => setZip(e.target.value)}
+              value={prefilledData.zip}
+              readOnly
             />
           </InputGroup>
         </Col>
@@ -136,10 +121,8 @@ const CheckoutInfo = () => {
           <p>Email</p>
           <InputGroup className="mb-3">
             <Form.Control
-              placeholder="Email"
-              aria-label="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={prefilledData.email}
+              readOnly
             />
           </InputGroup>
         </Col>
