@@ -35,9 +35,9 @@ const PurchaseTickets = () => {
       try {
         let url;
         if (movieCategory === "Coming Soon") {
-          url = `https://moviesitebackend.onrender.com/comingsoon/movie/${movieID}`;
+          url = `https://moviesitebackend.onrender.com/api/comingsoon/movie/${movieID}`;
         } else {
-          url = `https://moviesitebackend.onrender.com/${movieLocation.toLowerCase()}/movie/${movieID}`;
+          url = `https://moviesitebackend.onrender.com/api/${movieLocation.toLowerCase()}/movie/${movieID}`;
         }
         const response = await fetch(url);
         const data = await response.json();
