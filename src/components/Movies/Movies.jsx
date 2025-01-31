@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setLocation, setSelectedMovie, setCategory } from '../../redux/movieSlice';
@@ -17,6 +17,7 @@ const Movies = () => {
 
     const [movies, setMovies] = React.useState([]);
     const [error, setError] = React.useState(null);
+    const [loading, setLoading] = React.useState(true); // Track loading state
 
     // Initialize the location in Redux state on mount if not set
     useEffect(() => {
@@ -28,6 +29,7 @@ const Movies = () => {
     // Fetch movies based on the location and category
     useEffect(() => {
         const fetchMovies = async () => {
+            setLoading(true); // Set loading to true before the fetch starts
             try {
                 let endpoint;
                 if (selectedCategory === "Now Playing") {
@@ -48,6 +50,8 @@ const Movies = () => {
             } catch (error) {
                 console.error('Error fetching data:', error);
                 setError(error.message);  // Set error state
+            } finally {
+                setLoading(false); // Set loading to false once data is fetched or an error occurs
             }
         };
 
@@ -93,6 +97,11 @@ const Movies = () => {
     return (
         <Container className="container-lg">
             {error && <div className="error-message">{error}</div>} {/* Display error if present */}
+            {loading && (
+                <div className="loading-message">
+                   Server Starting up, Loading movies... this may take up to 50 seconds for the initial request due to being hosted on a free site.
+                </div>
+            )}
             <Row>
                 <Col className="col-12 options">
                     <div className="now-playing-coming-soon">
