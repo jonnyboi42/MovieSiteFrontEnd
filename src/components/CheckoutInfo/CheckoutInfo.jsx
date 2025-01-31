@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -8,13 +9,14 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import { useSelector } from "react-redux";
 
 const CheckoutInfo = () => {
+  const navigate = useNavigate(); // Initialize navigate function
+
   // Access necessary data from Redux store
   const movie = useSelector((state) => state.cart.movieCart.movie);
   const tickets = useSelector((state) => state.cart.movieCart.tickets);
   const location = useSelector((state) => state.cart.movieCart.location);
   const price = useSelector((state) => state.cart.movieCart.price);
 
-  // User can only edit the name field
   const [name, setName] = useState('');
 
   // Prefilled static values for other fields
@@ -50,8 +52,9 @@ const CheckoutInfo = () => {
 
       if (response.ok) {
         const result = await response.json();
-        alert(`Checkout successful! Your checkout ID is ${result.checkoutId}.`);
+        alert(`Checkout successful!`);
         setName('');
+        navigate('/'); // Navigate to home page after checkout
       } else {
         const errorData = await response.json();
         alert(`Error: ${errorData.error}`);
@@ -80,10 +83,7 @@ const CheckoutInfo = () => {
         <Col md={6}>
           <p>Credit Card</p>
           <InputGroup className="mb-3">
-            <Form.Control
-              value={prefilledData.creditCard}
-              readOnly
-            />
+            <Form.Control value={prefilledData.creditCard} readOnly />
           </InputGroup>
         </Col>
       </Row>
@@ -91,28 +91,19 @@ const CheckoutInfo = () => {
         <Col md={6}>
           <p>Billing Address</p>
           <InputGroup className="mb-3">
-            <Form.Control
-              value={prefilledData.billingAddress}
-              readOnly
-            />
+            <Form.Control value={prefilledData.billingAddress} readOnly />
           </InputGroup>
         </Col>
         <Col md={3}>
           <p>State</p>
           <InputGroup className="mb-3">
-            <Form.Control
-              value={prefilledData.state}
-              readOnly
-            />
+            <Form.Control value={prefilledData.state} readOnly />
           </InputGroup>
         </Col>
         <Col md={3}>
           <p>Zip</p>
           <InputGroup className="mb-3">
-            <Form.Control
-              value={prefilledData.zip}
-              readOnly
-            />
+            <Form.Control value={prefilledData.zip} readOnly />
           </InputGroup>
         </Col>
       </Row>
@@ -120,10 +111,7 @@ const CheckoutInfo = () => {
         <Col md={6}>
           <p>Email</p>
           <InputGroup className="mb-3">
-            <Form.Control
-              value={prefilledData.email}
-              readOnly
-            />
+            <Form.Control value={prefilledData.email} readOnly />
           </InputGroup>
         </Col>
       </Row>
