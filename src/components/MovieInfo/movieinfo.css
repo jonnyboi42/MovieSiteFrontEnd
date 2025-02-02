@@ -95,7 +95,7 @@
 }
 
 .spinner > p:nth-of-type(1){
-    color: white;
+    color: white !important;
     font-family: 'Exo 2', serif;
 
 }
