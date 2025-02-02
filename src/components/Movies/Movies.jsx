@@ -98,8 +98,9 @@ const Movies = () => {
         <Container className="container-lg">
             {error && <div className="error-message">{error}</div>} {/* Display error if present */}
             {loading && (
-                <div className="loading-message">
-                   Server Starting up, Loading movies... this may take up to 50 seconds for the initial request due to being hosted on a free site.
+                <div className="loading-container">
+                    <div className="spinner"></div>
+                    <p>Loading movies...</p>
                 </div>
             )}
             <Row>
