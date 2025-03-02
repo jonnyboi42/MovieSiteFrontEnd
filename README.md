@@ -2,42 +2,34 @@
 <img width="1410" alt="image" src="https://github.com/user-attachments/assets/e8f3cfec-dcf1-4c90-b2f4-31a6c75987d7">
 
 
-# Movie Site Frontend
+# 🎬 Movie Theater Website  
 
-## Overview
-This repository contains the frontend for the Movie Site application. The frontend is built using **React** and **Vite** for fast development and optimized builds. It also incorporates **Bootstrap** for responsive design and UI components.
+A full-stack movie theater website that allows users to **filter movies by location, view upcoming and now-playing movies, and "purchase" tickets**. Ticket checkout and redemption details are stored in a **PostgreSQL database**, with an **Express.js server** providing movie information.
 
-## Current Configuration
-- **Port**: The frontend is configured to run on **port 5173** by default.
+## 🌐 Live Demo  
+👉 [Movie Theater Website](https://moviesitefrontend.onrender.com/)  
 
-## Prerequisites
-Ensure that the backend server is running before starting the frontend. The backend can be found on my github named MovieSiteBackEnd.
+---
 
-## Getting Started
-To run the frontend locally:
+## 🚀 Features  
+✔ **Filter Movies by Location** – Users can browse movies available in their selected city.  
+✔ **Now Playing & Coming Soon Sections** – Easily view current and upcoming releases.  
+✔ **Ticket Purchasing System** – Users can "buy" tickets, with checkout and redemption data stored in a database.  
+✔ **Backend Server for Movie Data** – An **Express.js API** handles and serves movie-related information.  
+✔ **State Management with Redux** – Ensures smooth navigation and persistent data.  
+✔ **Database Storage** – PostgreSQL is used to manage ticket information.  
+✔ **Bootstrap for Styling** – Provides a clean, responsive UI.  
+✔ **Free Hosting on Render** – The **frontend, backend, and database are all hosted on Render** *(note: initial server requests may be slow due to free hosting limitations).*  
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/MovieSiteFrontEnd.git
-   ```
+---
 
-2. Navigate to the project directory:
-   ```bash
-   cd MovieSiteFrontEnd
-   ```
+## 🛠️ Technologies Used  
 
-3. Install the dependencies:
-   ```bash
-   npm install
-   ```
-
-4. Start the development server:
-   ```bash
-   npm run dev
-   ```
-
-The frontend should now be running on **http://localhost:5173**.
-
-## Upcoming Features
-- **Animations**: I am in the process of implementing enhanced animations for better user experience.
-- **Additional Features**: More functionalities are planned.
+| Technology       | Purpose                                         |  
+|-----------------|----------------------------------------------|  
+| **React**       | Front-end UI framework                      |  
+| **Redux**       | State management for smooth data flow       |  
+| **Bootstrap**   | Styling and responsive design               |  
+| **Express.js**  | Backend server to serve movie data          |  
+| **PostgreSQL**  | Database for storing ticket & user info     |  
+| **Render**      | Hosting for frontend, backend, and database |  
